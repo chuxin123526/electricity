@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.believe.electricity.po.Attachment" table="electricity_Attachment">
+		<id name="id" type="int" >
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="name" />
+		<property name="path" />
+		
+		<many-to-one name="user" class="com.believe.electricity.po.User" column="user_id"></many-to-one>
+	</class>
+</hibernate-mapping>

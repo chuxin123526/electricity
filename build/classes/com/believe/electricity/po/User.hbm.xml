@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.believe.electricity.po.User" table="electricity_User">
+		<id name="id" type="int" >
+			<generator class="native"></generator>
+		</id>
+		
+		<property name="name" />
+		<property name="loginName" />
+		<property name="sex" />
+		<property name="birthDate" type = "timestamp" />
+		<property name="contactTelephone" />
+		<property name="mobilePhone" />
+		<property name="email" />
+		<property name="isDuty" />
+		<property name="onDutyDate" type = "timestamp" />
+		<property name="offDutyDate" type = "timestamp" />
+		<property name="remark" />
+		<property name="unit" />
+		<property name="position" />
+
+
+		<many-to-one name="department" class="com.believe.electricity.po.Department" column="department_id"></many-to-one>
+		<many-to-one name="area" class="com.believe.electricity.po.Area" column="area_id"></many-to-one>
+			
+		<set name="attachmentss" cascade="all">
+		<key column="user_id"></key>
+		<one-to-many class = "com.believe.electricity.po.Attachment"/>
+		</set>		
+		
+		<set name="roles" table = "user_role">
+		<key column="user_id"></key>
+		<many-to-many class="com.believe.electricity.po.Role" column="role_id"></many-to-many>
+		</set>
+		
+	</class>
+</hibernate-mapping>

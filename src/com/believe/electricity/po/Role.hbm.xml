@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.believe.electricity.po.Role" table="electricity_role">
+		<id name="id" type="int" >
+			<generator class="native"></generator>
+		</id>
+		<property name="name"></property>
+
+
+		<set name="users" cascade="all" table = "user_role">
+		<key column="role_id"></key>
+		<many-to-many class="com.believe.electricity.po.User" column="user_id"></many-to-many>
+		</set>		
+		
+		<set name="privileges" cascade="all" table="role_privilege">
+		<key column="role_id"></key>
+		<many-to-many class="com.believe.electricity.po.Privilege" column="privilege_id"></many-to-many>
+		</set>
+		
+	</class>
+</hibernate-mapping>

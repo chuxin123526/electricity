@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 开发模式 -->
+	<constant name="struts.devMode" value="true"></constant>
+	<!-- ui主题，简单主题 -->
+	<constant name="struts.ui.theme" value="simple"></constant>
+	<!-- 修改struts2的后缀 改成.do -->
+	<constant name="struts.action.extension" value="action"></constant>
+
+	<!-- 系统管理 -->
+	<package name="system" namespace="/system" extends="json-default">
+
+		<global-results>
+			<result name="input">/input.jsp</result>
+		</global-results>
+
+		<!-- 用户管理配置 -->
+		<action name="userAction_*" class="userAction" method="{1}">
+			<result name="to_home" type="redirectAction">menuAction_home</result>
+			<result name="close">/close.jsp</result>
+			<result name="loginUI">/WEB-INF/page/menu/index.jsp</result>
+			<result name="list">/WEB-INF/page/system/userIndex.jsp</result>
+			<result name="add">/WEB-INF/page/system/userAdd.jsp</result>
+			<result name="toList" type = "redirectAction">userAction_list</result>
+			<result name="edit">/WEB-INF/page/system/userEdit.jsp</result>
+			<result name="download" type="stream">
+				<param name="contentType">application/octet-stream</param>
+				<param name="inputName">inputStream</param>
+				<param name="contentDisposition">attachment;filename="${fileName}"</param>
+				<param name="bufferSize">1024</param>
+			</result>
+			<result name = "getDepartmentByAreaId" type = "json">
+			<param name="root">departmentList</param>
+			</result>
+		</action>
+		
+		<!-- 角色管理配置-->
+		<action name="roleAction_*" class="roleAction" method="{1}">
+			<result name="index">/WEB-INF/page/system/roleIndex.jsp</result>
+			<result name="changeRole">/WEB-INF/page/system/changeRole.jsp</result>
+			<result name="toIndex" type = "redirectAction">roleAction_index</result>
+		</action>
+
+		<!-- 数据字典维护配置 -->
+		<action name="dataDictionaryAction_*" class="dataDictionaryAction"
+			method="{1}">
+			<result name="list">/WEB-INF/page/system/dictionaryIndex.jsp</result>
+			<result name="edit">/WEB-INF/page/system/dictionaryEdit.jsp</result>
+			<result name="toList" type="redirectAction">dataDictionaryAction_list</result>
+		</action>
+
+		<!-- 首页配置 -->
+		<action name="menuAction_*" class="menuAction" method="{1}">
+			<result name="home">/WEB-INF/page/menu/home.jsp</result>
+			<result name="top">/WEB-INF/page/menu/title.jsp</result>
+			<result name="left">/WEB-INF/page/menu/left.jsp</result>
+			<result name="change">/WEB-INF/page/menu/change.jsp</result>
+			<result name="loading">/WEB-INF/page/menu/loading.jsp</result>
+			<result name="stationRunCondition">/WEB-INF/page/menu/alermStation.jsp</result>
+			<result name="equipmentRunCondition">/WEB-INF/page/menu/alermDevice.jsp</result>
+		</action>
+
+		<!-- 运行监控配置 -->
+		<action name="baseMessageAction_*" class="baseMessageAction"
+			method="{1}">
+			<result name="info">/WEB-INF/page/system/actingIndex.jsp</result>
+			<result name="to_info" type="redirectAction">baseMessageAction_info</result>
+		</action>
+	</package>
+</struts>

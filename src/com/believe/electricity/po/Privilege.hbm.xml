@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="com.believe.electricity.po.Privilege" table="electricity_privilege">
+		<id name="id" type="int" >
+			<generator class="native"></generator>
+		</id>
+		<property name="name"></property>
+		<property name="url"></property>
+		<property name="isParent"></property>
+		<property name="isMenu"></property>
+		<property name="icon"></property>
+		
+		<many-to-one name="parent"  column="privilege_id" class="com.believe.electricity.po.Privilege">
+		</many-to-one>
+		
+		<set name="privileges">
+		<key column="privilege_id"></key>
+		<one-to-many class="com.believe.electricity.po.Privilege"/>
+		</set>
+		
+		<set name="roles" table = "role_privilege">
+		<key column="privilege_id"></key>
+		<many-to-many class="com.believe.electricity.po.Role" column="role_id"></many-to-many>
+		</set>
+		
+	</class>
+</hibernate-mapping>
